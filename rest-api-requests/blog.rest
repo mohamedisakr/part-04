@@ -12,8 +12,8 @@ POST  {{baseUrl}}{{blogPath}}
 Content-Type: {{contentType}}
 
 {        
-    "title":"node.js tips and tricks", 
+    "title":"intro to node.js", 
     "author":"mohamed hassan", 
-    "url":"http://localhost:3003/api/blogs", 
+    "url":"http://localhost:3003/api/blogs/intro-nodejs", 
     "likes":10
 }
