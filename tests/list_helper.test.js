@@ -1,4 +1,9 @@
-const { dummy, totalLikes, favoriteBlog } = require("../utils/list_helper");
+const {
+  dummy,
+  totalLikes,
+  favoriteBlog,
+  mostBlogs,
+} = require("../utils/list_helper"); //#endregion
 
 // describe("dummy", () => {
 //   test("return 1", () => {
@@ -8,6 +13,8 @@ const { dummy, totalLikes, favoriteBlog } = require("../utils/list_helper");
 //   });
 // });
 
+//#region Total Likes
+/* 
 describe("Total Likes", () => {
   test("total like = 20", () => {
     const blogs = [
@@ -52,6 +59,7 @@ describe("Total Likes", () => {
     expect(result).toBe(5);
   });
 });
+*/
 
 describe("Favorite Blog ", () => {
   test("which blog has most likes", () => {
@@ -116,4 +124,8 @@ describe("Favorite Blog ", () => {
     const received = favoriteBlog(blogs);
     expect(received).toEqual(expected);
   });
+});
+
+describe("Most Blogs", () => {
+  test("the author who has the largest amount of blogs", () => {});
 });

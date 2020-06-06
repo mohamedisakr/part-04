@@ -34,13 +34,13 @@ const favoriteBlog = (blogs) => {
   return result;
 };
 
-module.exports = { dummy, totalLikes, favoriteBlog };
-//   blogs.reduce((prev, current) => {
-//     // console.log(prev, current);
-//     result = Math.max(prev.likes, current.likes);
-//   });
+//  returns the author who has the largest amount of blogs.
+const mostBlogs = (blogs) => {
+  const result = blogs.reduce((a, b) => {
+    a.blogs > b.logs
+      ? { author: a.author, blogs: a.blogs }
+      : { author: b.author, blogs: b.blogs };
+  });
+};
 
-//   const most = {};
-//   blogs.forEach((blog, index, list) => {
-
-//   });
+module.exports = { dummy, totalLikes, favoriteBlog, mostBlogs };
