@@ -1,0 +1,19 @@
+### global variables
+@baseUrl = http://localhost:3003
+@contentType = application/json
+
+@blogPath = /api/blogs
+
+### get all
+GET {{baseUrl}}{{blogPath}}
+
+### add new blog
+POST  {{baseUrl}}{{blogPath}}
+Content-Type: {{contentType}}
+
+{        
+    "title":"node.js tips and tricks", 
+    "author":"mohamed hassan", 
+    "url":"http://localhost:3003/api/blogs", 
+    "likes":10
+}
