@@ -1,18 +1,30 @@
+const mongoose = require("mongoose");
+const supertest = require("supertest");
+const app = require("../app");
+
+const api = supertest(app);
+const Blog = require("../models/blog");
+const { initialBlogs, nonExistingId, blogsInDb } = require("./test_helper");
+
 const {
   dummy,
   totalLikes,
   favoriteBlog,
   mostBlogs,
   mostLikes,
-} = require("../utils/list_helper"); //#endregion
+} = require("../utils/list_helper");
 
-// describe("dummy", () => {
-//   test("return 1", () => {
-//     const blogs = [];
-//     const result = dummy(blogs);
-//     expect(result).toBe(1);
-//   });
-// });
+//#region dummy
+/*
+describe("dummy", () => {
+  test("return 1", () => {
+    const blogs = [];
+    const result = dummy(blogs);
+    expect(result).toBe(1);
+  });
+});
+*/
+//#endregion
 
 //#region Total Likes
 /* 
@@ -61,7 +73,10 @@ describe("Total Likes", () => {
   });
 });
 */
+//#endregion
 
+//#region
+/*
 describe("Favorite Blog ", () => {
   test("which blog has most likes", () => {
     const blogs = [
@@ -251,5 +266,24 @@ describe("Most Likes", () => {
     };
     const received = mostLikes(blogs);
     expect(received).toEqual(expected);
+  });
+});
+*/
+//#endregion
+
+describe("4.8: Blog list tests, step1", () => {
+  // Optimizing the beforeEach function
+  beforeEach(async () => {
+    await Blog.deleteMany({});
+
+    for (let blog of initialBlogs) {
+      let blogObject = new Blog(blog);
+      await blogObject.save();
+    }
+  });
+
+  test("makes an HTTP GET request to the /api/blogs url.", async () => {
+    const response = await blogsInDb();
+    expect(response).toHaveLength(initialBlogs.length);
   });
 });
