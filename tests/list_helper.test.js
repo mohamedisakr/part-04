@@ -282,8 +282,31 @@ describe("4.8: Blog list tests, step1", () => {
     }
   });
 
-  test("makes an HTTP GET request to the /api/blogs url.", async () => {
+  test("HTTP GET request to the /api/blogs url.", async () => {
     const response = await blogsInDb();
     expect(response).toHaveLength(initialBlogs.length);
+  });
+
+  test("HTTP POST request to the /api/blogs url.", async () => {
+    const newBlog = {
+      title: "JavaScript the complete guide",
+      author: "Mohamed Sakr",
+      url: "fullstackopen.com/en/part4/testing_the_backend",
+      likes: 20,
+    };
+
+    await api
+      .post("/api/blogs")
+      .send(newBlog)
+      .expect(200)
+      .expect("Content-Type", /application\/json/);
+
+    const blogsAtEnd = await blogsInDb();
+    expect(blogsAtEnd).toHaveLength(initialBlogs.length + 1);
+
+    const titles = blogsAtEnd.map((blog) => blog.title);
+    expect(titles).toContain(newBlog.title);
+    // const response = await blogsInDb();
+    // expect(response).toHaveLength(initialBlogs.length);
   });
 });
