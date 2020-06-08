@@ -1,10 +1,17 @@
+// jest.useFakeTimers();
+
 const mongoose = require("mongoose");
 const supertest = require("supertest");
 const app = require("../app");
 
 const api = supertest(app);
 const Blog = require("../models/blog");
-const { initialBlogs, nonExistingId, blogsInDb } = require("./test_helper");
+const {
+  initialBlogs,
+  nonExistingId,
+  blogsInDb,
+  findByCriteria,
+} = require("./test_helper");
 
 const {
   dummy,
@@ -335,4 +342,38 @@ describe("4.8: Blog list tests, step1", () => {
     const titles = blogsAtend.map((b) => b.title);
     expect(titles).toContain(newBlog.title);
   });
+
+  test("4.11* that if the likes property is missing from the request, it will default to the value 0", async () => {
+    let inserted = {};
+    const newBlog = {
+      title: "Digging Into Node.js",
+      author: "mohamed sakr",
+      url: "http://localhost:3003/api/blogs/intro-nodejs",
+      likes: 10,
+    };
+    await api
+      .post("/api/blogs")
+      .send(newBlog)
+      .expect(200)
+      .expect("Content-Type", /application\/json/)
+      .end(() => {
+        inserted = findByCriteria(newBlog.title);
+      });
+
+    expect(inserted.likes).toBe(0);
+  });
+
+  test("4.12*: Blog list tests step 5,  verifies that if the title and url properties are missing from the request data, the backend responds to the request with the status code 400 Bad Request.", async () => {
+    const newBlog = {
+      author: "mohamed sakr",
+      likes: 10,
+    };
+
+    await api.post("/api/blogs").send(newBlog).expect(400);
+
+    const blogsAtend = await blogsInDb();
+    expect(blogsAtend).toHaveLength(initialBlogs.length);
+  });
+
+  afterAll(() => mongoose.connection.close());
 });
