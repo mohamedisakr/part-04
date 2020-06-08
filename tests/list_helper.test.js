@@ -21,6 +21,14 @@ const {
   mostLikes,
 } = require("../utils/list_helper");
 
+beforeEach(async () => {
+  await Blog.deleteMany({});
+
+  const blogList = initialBlogs.map((blog) => new Blog(blog));
+  const promiseList = blogList.map((blog) => blog.save());
+  await Promise.all(promiseList);
+});
+
 //#region dummy
 /*
 describe("dummy", () => {
@@ -280,14 +288,6 @@ describe("Most Likes", () => {
 
 describe("4.8: Blog list tests, step1", () => {
   // Optimizing the beforeEach function
-  beforeEach(async () => {
-    await Blog.deleteMany({});
-
-    for (let blog of initialBlogs) {
-      let blogObject = new Blog(blog);
-      await blogObject.save();
-    }
-  });
 
   test("HTTP GET request to the /api/blogs url.", async () => {
     const response = await blogsInDb();
@@ -375,5 +375,21 @@ describe("4.8: Blog list tests, step1", () => {
     expect(blogsAtend).toHaveLength(initialBlogs.length);
   });
 
-  afterAll(() => mongoose.connection.close());
+  describe("deletion of a note", () => {
+    test("4.13 succeeds with status code 204 if id is valid", async () => {
+      const blogsAtStart = await blogsInDb();
+      const blogToDelete = blogsAtStart[0];
+
+      await api.delete(`/api/blogs/${blogToDelete.id}`).expect(204);
+
+      const blogsAtEnd = await blogsInDb();
+
+      expect(blogsAtEnd).toHaveLength(initialBlogs.length - 1);
+
+      const titles = blogsAtEnd.map((r) => r.title);
+
+      expect(titles).not.toContain(blogToDelete.title);
+    });
+  });
 });
+afterAll(() => mongoose.connection.close());
