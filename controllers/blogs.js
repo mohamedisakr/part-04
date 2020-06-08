@@ -4,12 +4,16 @@ const Blog = require("../models/blog");
 blogsRouter.get("/", async (request, response) => {
   const blogs = await Blog.find({});
   response.json(blogs.map((blog) => blog.toJSON()));
+});
 
-  // Blog.find({})
-  //   .then((blogs) => {
-  //     response.json(blogs.map((blog) => blog.toJSON()));
-  //   })
-  //   .catch((error) => next(error));
+blogsRouter.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  const blog = await Blog.findById(id);
+  if (blog) {
+    res.json(blog.toJSON());
+  } else {
+    res.status(404).end;
+  }
 });
 
 blogsRouter.post("/", async (request, response) => {
@@ -17,14 +21,12 @@ blogsRouter.post("/", async (request, response) => {
   const blog = new Blog({ title, author, url, likes });
   const savedBlog = await blog.save();
   response.json(savedBlog.toJSON());
+});
 
-  // console.log(blog);
-  // blog
-  //   .save()
-  //   .then((savedBlog) => {
-  //     response.json(savedBlog.toJSON());
-  //   })
-  //   .catch((error) => next(error));
+blogsRouter.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+  await Blog.findByIdAndRemove(id);
+  res.status(204).end();
 });
 
 module.exports = blogsRouter;

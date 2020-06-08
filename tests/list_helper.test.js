@@ -315,4 +315,24 @@ describe("4.8: Blog list tests, step1", () => {
     const firstBlog = response[0];
     expect(firstBlog.id).toBeDefined();
   });
+
+  test("4.10 verify that making an HTTP POST request to the /api/blogs url successfully creates a new blog post", async () => {
+    const newBlog = {
+      title: "Digging Into Node.js",
+      author: "mohamed sakr",
+      url: "http://localhost:3003/api/blogs/intro-nodejs",
+      likes: 10,
+    };
+    await api
+      .post("/api/blogs")
+      .send(newBlog)
+      .expect(200)
+      .expect("Content-Type", /application\/json/);
+
+    const blogsAtend = await blogsInDb();
+    expect(blogsAtend).toHaveLength(initialBlogs.length + 1);
+
+    const titles = blogsAtend.map((b) => b.title);
+    expect(titles).toContain(newBlog.title);
+  });
 });
