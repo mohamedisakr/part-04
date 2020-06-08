@@ -309,4 +309,10 @@ describe("4.8: Blog list tests, step1", () => {
     // const response = await blogsInDb();
     // expect(response).toHaveLength(initialBlogs.length);
   });
+
+  test("verify that the unique identifier property of the blog posts is named id", async () => {
+    const response = await blogsInDb();
+    const firstBlog = response[0];
+    expect(firstBlog.id).toBeDefined();
+  });
 });
