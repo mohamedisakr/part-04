@@ -12,8 +12,34 @@ POST  {{baseUrl}}{{blogPath}}
 Content-Type: {{contentType}}
 
 {        
-    "title":"node.js the hard parts", 
-    "author":"mohamed sakr", 
-    "url":"http://localhost:3003/api/blogs/intro-nodejs", 
+    "title":"test", 
+    "author":"test author", 
+    "url":"http://localhost:3003/api/blogs/test", 
     "likes":10
 }
+
+### update existing blog
+PUT  {{baseUrl}}{{blogPath}}/5ede272a6d21c0150838e8ec
+Content-Type: {{contentType}}
+
+{   
+    "likes":999
+}
+
+### delete 
+DELETE  {{baseUrl}}{{blogPath}}/5ede237a6d21c0150838e8eb
+
+# {        
+#     "title":"node.js the hard parts", 
+#     "author":"mohamed sakr", 
+#     "url":"http://localhost:3003/api/blogs/intro-nodejs", 
+#     "likes":10
+# }
+
+
+# {       
+#     "title":"test", 
+#     "author":"test author", 
+#     "url":"http://localhost:3003/api/blogs/test",
+#     "likes":11
+# }
