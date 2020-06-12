@@ -1,0 +1,16 @@
+### global variables
+@baseUrl = http://localhost:3003
+@contentType = application/json
+
+@loginPath = /api/login
+
+
+
+### user login 
+POST  {{baseUrl}}{{loginPath}}
+Content-Type: {{contentType}}
+
+{        
+    "username": "mluukkai",
+    "password": "salainen"
+}

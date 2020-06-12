@@ -1,0 +1,27 @@
+### global variables
+@baseUrl = http://localhost:3003
+@contentType = application/json
+
+@userPath = /api/users
+
+### get all
+GET {{baseUrl}}{{userPath}}
+
+### get by id
+GET {{baseUrl}}{{userPath}}/5ee23b1e44b5a21f5851faa4
+
+### add new user
+POST  {{baseUrl}}{{userPath}}
+Content-Type: {{contentType}}
+
+{
+    "username": "root",
+    "name": "Superuser",
+    "password": "salainen"
+}
+
+# {        
+#     "username": "mluukkai",
+#     "name": "Matti Luukkainen",
+#     "password": "salainen"
+# }

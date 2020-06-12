@@ -11,12 +11,14 @@ GET {{baseUrl}}{{blogPath}}
 POST  {{baseUrl}}{{blogPath}}
 Content-Type: {{contentType}}
 
-{        
-    "title":"test", 
-    "author":"test author", 
-    "url":"http://localhost:3003/api/blogs/test", 
-    "likes":10
+{
+    "title":"Node.js intro",
+    "author":"root",
+    "url":"http://localhost:3003/api/blogs/intro-node",
+    "likes":  190,
+    "userId": "5ee243d88aad501bcc08cee2"
 }
+
 
 ### update existing blog
 PUT  {{baseUrl}}{{blogPath}}/5ede272a6d21c0150838e8ec
