@@ -29,6 +29,11 @@ mongoose
 app.use(cors());
 app.use(express.static("build"));
 app.use(express.json());
+
+// if you register this middleware in the app.js file before all
+// routes app.use(middleware.tokenExtractor) routes can access
+// the token with request.token
+app.use(middleware.tokenExtractor);
 app.use(middleware.requestLogger);
 
 app.use("/api/login", loginRouter);

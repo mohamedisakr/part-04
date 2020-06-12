@@ -13,10 +13,10 @@ Content-Type: {{contentType}}
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI1ZWUyM2IxZTQ0YjVhMjFmNTg1MWZhYTQiLCJpYXQiOjE1OTE5NTUyNDl9.b27zJF1Qmu9v7UAQDLiEJ6dSWgJXLXO9YYIm3_vAxBs
 
 {
-    "title":"token test",
+    "title":"token extractor middleware",
     "author":"root",
     "url":"http://localhost:3003/api/blogs/intro-node",
-    "likes":  190
+    "likes":  123400
 }
 
 # {
