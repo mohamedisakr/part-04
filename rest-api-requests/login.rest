@@ -11,6 +11,11 @@ POST  {{baseUrl}}{{loginPath}}
 Content-Type: {{contentType}}
 
 {        
-    "username": "mluukkai",
+    "username": "root",
     "password": "salainen"
 }
+
+# {        
+#     "username": "mluukkai",
+#     "password": "salainen"
+# }
