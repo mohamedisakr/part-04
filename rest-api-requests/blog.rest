@@ -28,13 +28,13 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sd
 # }
 
 
-### update existing blog
-PUT  {{baseUrl}}{{blogPath}}/5ede272a6d21c0150838e8ec
+### update existing blog likes ONLY
+PUT  {{baseUrl}}{{blogPath}}/5ee3818b076569150c3c9a10
 Content-Type: {{contentType}}
 
-{   
-    "likes":999
-}
+# {   
+#     "likes":999
+# }
 
 ### delete existing blog
 DELETE  {{baseUrl}}{{blogPath}}/5ee3818b076569150c3c9a10

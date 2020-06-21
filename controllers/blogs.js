@@ -12,7 +12,9 @@ const getTokenFromRequest = (request) => {
 };
 
 blogsRouter.get("/", async (request, response) => {
-  const blogs = await Blog.find({}).populate("user", { username: 1, name: 1 });
+  const blogs = await Blog.find({})
+    .sort({ likes: -1 })
+    .populate("user", { username: 1, name: 1 });
   response.json(blogs.map((blog) => blog.toJSON()));
 });
 
@@ -56,13 +58,11 @@ blogsRouter.put("/:id", async (req, res) => {
   const id = req.params.id;
   // const { title, author, url, likes } = req.body;
 
-  const blogToUpdate = { likes: req.body.likes }; // title, author, url,
+  // const blogToUpdate = { likes: req.body.likes + 1 }; // title, author, url,
   const updatedBlog = await Blog.findByIdAndUpdate(
     id,
-    { $set: blogToUpdate },
-    {
-      new: true,
-    }
+    { $inc: { likes: 1 } },
+    { new: true }
   );
   res.json(updatedBlog.toJSON());
 });
